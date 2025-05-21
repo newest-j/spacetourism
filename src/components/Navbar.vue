@@ -112,7 +112,7 @@ export default {};
   left: 70px;
   right: 0;
   width: 60%;
-  z-index: 10;
+  z-index: 1;
 }
 
 @media screen and (max-width: 768px) {

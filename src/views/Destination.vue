@@ -4,32 +4,39 @@
       <p id="para1" class="h5">
         <span id="first-para1">01</span> PICK YOUR DESTINATION
       </p>
-      <div class="d-flex justify-content-center pt-5" id="box-gap">
+      <div
+        class="d-flex align-items-center justify-content-center pt-5"
+        id="box-gap"
+      >
         <div>
-          <img src="" class="destination-img" />
+          <img
+            :src="destinations[selected]?.images?.png"
+            class="destination-img img-fluid"
+            alt="Destination image"
+          />
         </div>
         <div id="text-container">
           <ul class="nav" id="destination-nav">
-            <li class="nav-item">
-              <RouterLink></RouterLink>
-              <a href="#" class="nav-link active" id="color">MOON</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" id="color">MARS</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link active" id="color">EUROPA</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" id="color">TITAN</a>
+            <li
+              @click="currentDestination(index)"
+              class="nav-item"
+              v-for="(destination, index) in destinations"
+              :key="index"
+            >
+              <a
+                href="#"
+                :class="{ active: selected === index }"
+                class="nav-link"
+                id="color"
+                >{{ destination.name.toUpperCase() }}</a
+              >
             </li>
           </ul>
-          <h1 class="text-white display-1" id="destination-name">MOON</h1>
+          <h1 class="text-white display-1" id="destination-name">
+            {{ destinations[selected]?.name.toUpperCase() || "Loding..." }}
+          </h1>
           <p class="text" id="para2">
-            See our planet as you’ve never seen it before. A perfect relaxing
-            trip away to help regain perspective and come back refreshed. While
-            you’re there, take in some history by visiting the Luna 2 and Apollo
-            11 landing sites.
+            {{ destinations[selected]?.description || "Loding..." }}
           </p>
           <div>
             <hr class="text-white" />
@@ -37,11 +44,15 @@
           <div class="d-flex" id="details-gap">
             <div>
               <p id="details">AVG. DISTANCE</p>
-              <p class="dist text-white">384,400 km</p>
+              <p class="dist text-white">
+                {{ destinations[selected]?.distance || "Loding..." }}
+              </p>
             </div>
             <div>
               <p id="details">EST. TRAVEL TIME</p>
-              <p class="travel text-white">3 days</p>
+              <p class="travel text-white">
+                {{ destinations[selected]?.travel || "Loding..." }}
+              </p>
             </div>
           </div>
         </div>
@@ -53,7 +64,10 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      destinations: [],
+      selected: 0,
+    };
   },
 
   methods: {
@@ -61,14 +75,20 @@ export default {
       try {
         const response = await fetch("/data/data.json");
         const data = await response.json();
-        console.log(data);
-        return data.destinations;
+        this.destinations = data.destinations;
+        console.log(this.destinations);
       } catch (error) {
         console.error("Error fetching destinations:", error);
       }
     },
+    currentDestination(index) {
+      this.selected = index;
+      console.log(this.destinations[this.selected]);
+    },
     setCurrentDestination() {},
   },
+
+  watch: {},
 
   mounted() {
     this.fetchData();
@@ -89,6 +109,19 @@ export default {
   left: 0;
   z-index: -1;
 }
+.nav-item {
+  position: relative;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 10px;
+  width: 70%;
+  border-bottom: 3px solid #ffffff;
+}
+
 .container {
   margin-top: 100px;
 }
@@ -105,7 +138,7 @@ export default {
 }
 
 #text-container {
-  width: 400px;
+  max-width: 400px;
 }
 
 #box-gap {
@@ -160,6 +193,11 @@ export default {
     display: flex;
     justify-content: center;
   }
+  #para1 {
+    /* text-align: center; */
+    display: block;
+    margin: 0 auto;
+  }
 
   #details-gap {
     justify-content: center;
@@ -196,6 +234,11 @@ export default {
 
   #destination-name {
     font-size: 50px;
+  }
+  #para1 {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
   }
 
   #para2 {

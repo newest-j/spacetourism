@@ -150,21 +150,21 @@ export default {};
 }
 
 /* Mobile */
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
   .home-container {
     background-image: url(/public/images/home/background-home-mobile.jpg);
   }
 
   #para1 {
-    font-size: 10px;
+    font-size: 15px;
   }
 
   #name {
-    font-size: 55px;
+    font-size: 65px;
   }
 
   #para2 {
-    font-size: 10px;
+    font-size: 20px;
   }
 
   #button {
