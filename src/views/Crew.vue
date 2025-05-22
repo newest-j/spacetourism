@@ -7,28 +7,22 @@
       <div class="d-flex justify-content-center mt-5 gap-5" id="box-gap">
         <div class="d-flex align-items-center">
           <div class="text-box">
-            <p id="name" class="h5">COMMANDER</p>
-            <h1 class="text-white display-6" id="crewname">DOUGLAS HURLEY</h1>
+            <p id="name" class="h5">
+              {{ crews[selected]?.role || "Loding..." }}
+            </p>
+            <h1 class="text-white display-6" id="crewname">
+              {{ crews[selected]?.name || "Loding..." }}
+            </h1>
             <p class="text h6">
-              Douglas Gerald Hurley is an American engineer, former Marine Corps
-              pilot and former NASA astronaut. He launched into space for the
-              third time as commander of Crew Dragon Demo-2.
+              {{ crews[selected]?.bio || "Loding..." }}
             </p>
 
             <div id="btn-box" class="d-flex gap-3">
               <button
-                type="button"
-                class="btn btn-secondary rounded-circle px-2 py-1 active"
-              ></button>
-              <button
-                type="button"
-                class="btn btn-secondary rounded-circle p-2"
-              ></button>
-              <button
-                type="button"
-                class="btn btn-secondary rounded-circle p-2"
-              ></button>
-              <button
+                @click="currentCrew(index)"
+                v-for="(crew, index) in crews"
+                :key="index"
+                :class="{ active: selected === index }"
                 type="button"
                 class="btn btn-secondary rounded-circle p-2"
               ></button>
@@ -38,8 +32,8 @@
         <div>
           <img
             id="crewimage"
-            class="width"
-            src="/public/images/crew/image-douglas-hurley.png"
+            class="crewimg"
+            :src="crews[selected]?.images?.png"
           />
         </div>
       </div>
@@ -48,12 +42,42 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      crews: [],
+      selected: 0,
+    };
+  },
+
+  methods: {
+    async fetchData() {
+      try {
+        const response = await fetch("/data/data.json");
+        const data = await response.json();
+        this.crews = data.crew;
+        // console.log(this.crews);
+      } catch (error) {
+        console.error("Error fetching crews:", error);
+      }
+    },
+    currentCrew(index) {
+      this.selected = index;
+      // console.log(this.crews[this.selected]);
+    },
+  },
+
+  watch: {},
+
+  mounted() {
+    this.fetchData();
+  },
+};
 </script>
 
 <style scoped>
 .home-container {
-  background-image: url(/public/images/crew/background-crew-desktop.jpg);
+  background-image: url(/images/crew/background-crew-desktop.jpg);
   background-size: cover;
   background-position: center center;
   min-height: 100vh;
@@ -67,10 +91,7 @@ export default {};
 #para1 {
   color: #ffffff;
   word-spacing: 5px;
-  /* text-align:justify; */
-  /* margin-left: 200px; */
-  /* margin-left: 150px; */
-  /* font-size: 35px; */
+  margin-left: 125px;
 }
 .container {
   margin-top: 100px;
@@ -80,8 +101,9 @@ export default {};
   color: #d0d6f9;
 }
 
-.width {
-  width: 280px;
+.crewimg {
+  width: 300px;
+  height: 380px;
 }
 
 .text {
@@ -89,8 +111,7 @@ export default {};
 }
 
 .text-box {
-  width: 530px;
-  /* border: 2px solid red; */
+  max-width: 530px;
 }
 
 #name {
@@ -101,13 +122,17 @@ export default {};
   margin-top: 100px;
 }
 
-#btn-box .active {
+.active {
   background-color: #ffffff;
 }
 
-@media (max-width: 769px) {
+@media (max-width: 765px) {
   .home-container {
-    background-image: url(/public/images/crew/background-crew-mobile.jpg);
+    background-image: url(/images/crew/background-crew-tablet.jpg);
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    width: 100%;
   }
   #box-gap {
     flex-direction: column;
@@ -119,15 +144,25 @@ export default {};
   #btn-box {
     justify-content: center;
   }
+  #para1 {
+    /* text-align: center; */
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 376px) {
   .home-container {
-    background-image: url(/public/images/technology/background-technology-mobile.jpg);
+    background-image: url(/images/technology/background-technology-mobile.jpg);
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    width: 100%;
   }
   #para1 {
     text-align: center;
-    margin-left: 0px;
+    display: block;
+    margin: 0 auto;
   }
 }
 </style>

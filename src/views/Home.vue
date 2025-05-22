@@ -38,7 +38,7 @@ export default {};
 
 <style scoped>
 .home-container {
-  background-image: url(/public/images/home/background-home-desktop.jpg);
+  background-image: url(/images/home/background-home-desktop.jpg);
   background-size: cover;
   background-position: center center;
   min-height: 100vh;
@@ -114,7 +114,7 @@ export default {};
 /* Tablet */
 @media screen and (max-width: 765px) {
   .home-container {
-    background-image: url(/public/images/home/background-home-tablet.jpg);
+    background-image: url(/images/home/background-home-tablet.jpg);
   }
 
   #gap {
@@ -152,7 +152,7 @@ export default {};
 /* Mobile */
 @media screen and (max-width: 376px) {
   .home-container {
-    background-image: url(/public/images/home/background-home-mobile.jpg);
+    background-image: url(/images/home/background-home-mobile.jpg);
   }
 
   #para1 {

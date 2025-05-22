@@ -76,16 +76,15 @@ export default {
         const response = await fetch("/data/data.json");
         const data = await response.json();
         this.destinations = data.destinations;
-        console.log(this.destinations);
+        // console.log(this.destinations);
       } catch (error) {
         console.error("Error fetching destinations:", error);
       }
     },
     currentDestination(index) {
       this.selected = index;
-      console.log(this.destinations[this.selected]);
+      // console.log(this.destinations[this.selected]);
     },
-    setCurrentDestination() {},
   },
 
   watch: {},
@@ -98,7 +97,7 @@ export default {
 
 <style scoped>
 .home-container {
-  background-image: url(/public/images/destination/background-destination-desktop.jpg);
+  background-image: url(/images/destination/background-destination-desktop.jpg);
   background-size: cover;
   background-position: center center;
   min-height: 100vh;
@@ -180,7 +179,7 @@ export default {
 
 @media (max-width: 765px) {
   .home-container {
-    background-image: url(/public/images/destination/background-destination-desktop.jpg);
+    background-image: url(/images/destination/background-destination-tablet.jpg);
   }
   #box-gap {
     flex-direction: column;
@@ -226,7 +225,7 @@ export default {
 
 @media (max-width: 376px) {
   .home-container {
-    background-image: url(/public/images/destination/background-destination-mobile.jpg);
+    background-image: url(/images/destination/background-destination-mobile.jpg);
   }
   .destination-img {
     width: 200px;
