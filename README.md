@@ -1,29 +1,25 @@
-# space-tourism
+# 🌌 Space Tourism Website
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a responsive, interactive **space tourism** website built with **Vue 3** and **Vite**. It allows users to explore different destinations, meet the crew, and learn about the technology used for space travel — inspired by a front-end design challenge.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Features
 
-## Customize configuration
+- 🚀 Explore destinations like the Moon, Mars, Europa, and Titan
+- 👨‍🚀 Meet your crew members
+- 🛰️ Learn about space technology
+- 🎨 Beautiful and responsive UI for desktop, tablet, and mobile
+- ⚡ Fast development powered by Vite
+- 📦 Modular Vue components
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## 🛠 Project Setup
 
-```sh
+Install dependencies:
+
+```bash
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```
