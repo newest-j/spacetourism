@@ -30,7 +30,16 @@
           </div>
         </div>
         <div>
+          <div v-if="isImageLoading">
+            <div>
+              <div class="spinner-border text-primary"></div>
+              Image loading...
+            </div>
+          </div>
+
           <img
+            v-show="!isImageLoading"
+            @load="handleImageLoad"
             id="crewimage"
             class="crewimg"
             :src="crews[selected]?.images?.png"
@@ -47,6 +56,7 @@ export default {
     return {
       crews: [],
       selected: 0,
+      isImageLoading: true,
     };
   },
 
@@ -65,9 +75,10 @@ export default {
       this.selected = index;
       // console.log(this.crews[this.selected]);
     },
+    handleImageLoad() {
+      this.isImageLoading = false;
+    },
   },
-
-  watch: {},
 
   mounted() {
     this.fetchData();

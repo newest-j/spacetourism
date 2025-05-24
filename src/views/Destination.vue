@@ -9,10 +9,18 @@
         id="box-gap"
       >
         <div>
+          <div v-if="isImageLoading">
+            <div>
+              <div class="spinner-border text-primary"></div>
+              Image loading...
+            </div>
+          </div>
           <img
+            v-show="!isImageLoading"
             :src="destinations[selected]?.images?.png"
             class="destination-img img-fluid"
             alt="Destination image"
+            @load="handleImageLoad"
           />
         </div>
         <div id="text-container">
@@ -67,6 +75,7 @@ export default {
     return {
       destinations: [],
       selected: 0,
+      isImageLoading: true,
     };
   },
 
@@ -85,9 +94,10 @@ export default {
       this.selected = index;
       // console.log(this.destinations[this.selected]);
     },
+    handleImageLoad() {
+      this.isImageLoading = false;
+    },
   },
-
-  watch: {},
 
   mounted() {
     this.fetchData();

@@ -32,7 +32,16 @@
           </div>
         </div>
         <div>
+          <div v-if="isImageLoading">
+            <div>
+              <div class="spinner-border text-primary"></div>
+              Image loading...
+            </div>
+          </div>
+
           <img
+            v-show="!isImageLoading"
+            @load="handleImageLoad"
             class="techimage img-fluid"
             :src="technologies[selected]?.images?.portrait"
           />
@@ -48,6 +57,7 @@ export default {
     return {
       technologies: [],
       selected: 0,
+      isImageLoading: true,
     };
   },
 
@@ -66,9 +76,10 @@ export default {
       this.selected = index;
       // console.log(this.technologies[this.selected]);
     },
+    handleImageLoad() {
+      this.isImageLoading = false;
+    },
   },
-
-  watch: {},
 
   mounted() {
     this.fetchData();
