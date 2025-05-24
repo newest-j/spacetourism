@@ -31,7 +31,7 @@
         </div>
         <div>
           <div v-if="isImageLoading">
-            <div>
+            <div class="text-primary">
               <div class="spinner-border text-primary"></div>
               Image loading...
             </div>

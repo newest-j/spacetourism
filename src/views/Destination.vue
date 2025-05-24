@@ -8,7 +8,7 @@
         class="d-flex align-items-center justify-content-center pt-5"
         id="box-gap"
       >
-        <div>
+        <div class="text-primary">
           <div v-if="isImageLoading">
             <div>
               <div class="spinner-border text-primary"></div>
