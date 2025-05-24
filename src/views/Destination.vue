@@ -8,9 +8,9 @@
         class="d-flex align-items-center justify-content-center pt-5"
         id="box-gap"
       >
-        <div class="text-primary">
+        <div>
           <div v-if="isImageLoading">
-            <div>
+            <div class="text-primary">
               <div class="spinner-border text-primary"></div>
               Image loading...
             </div>
